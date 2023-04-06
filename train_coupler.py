@@ -1,3 +1,5 @@
+import random
+
 player_list = [] # names
 pet_list = []
 
@@ -14,14 +16,32 @@ while len(finished) == 0:
     pet_dict[pet_list[-1]] = int(input("Pet level:"))
     finished = input('Press enter to add another player-pet pair...')
 
+print(len(player_list), "player-pet pairs registered.")
+
+pair_avgs = {}
 for i in range(len(player_dict),0,-1):
     print("Average level of pair", player_list[i-1], "+", pet_list[i-1],":")
     pair_avgs[player_list[i-1]+":"+ pet_list[i-1]] = (player_dict[player_list[i-1]]+pet_dict[pet_list[i-1]])/2
     print(pair_avgs[player_list[i-1]+":"+ pet_list[i-1]])
 
-print(len(player_list), "player-pet pairs registered. Choose team size:")
-teamsize = int(input())
-pair_avgs = {}
+teamsize = int(input("Choose team size:"))
 
+pair_names = pair_avgs.keys()
+
+avg_threshold = int(input("Enter treshold for team combo:"))
+itermax = 100
+iter = 0
+teamavg = 0
+
+while (iter <= itermax) and (teamavg <= avg_threshold):
+    iter += 1
+
+    teamavg = 0
+    team = random.sample(pair_names, teamsize)
+    print(team)
+    for pair in team:
+        teamavg += pair_avgs[pair]
+    teamavg = teamavg / teamsize
+    print("Team average:", round(teamavg))
 
 
