@@ -44,6 +44,19 @@ while (iter <= itermax) and (teamavg <= avg_threshold):
     teamavg = teamavg / teamsize
     print("Team average:", round(teamavg))
 
-
-
+with open('testlvls.txt') as f:
+    line_info = []
+    for line in f:
+        word = ''
+        for c in line:
+            if (c != ' ') and (c != '\n'):
+                word += c
+            else:
+                try:
+                    word = int(word)
+                    line_info.append(word)
+                    word = ''
+                except:
+                    line_info.append(word)
+                    word = ''
 
